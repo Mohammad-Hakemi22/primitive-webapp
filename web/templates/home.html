@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primitive-WebApp</title>
+</head>
+<body>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="image">
+        <br>
+        <br>
+        <input type="text" name="numshapes" placeholder="Number of Shapes">
+        <br>
+        <br>
+        <span>0: Combo, 1: Triangle, 2: Rect, 3: Ellipse, 4: Circle, 5: Rotatedrect, 6: Rotatedellipse, 7: Polygon</span>
+        <br>
+        <input type="text" name="shape" placeholder="Shape">
+        <br>
+        <br>
+        <button type="submit">Upload</button>
+
+    </form>
+</body>
+</html>

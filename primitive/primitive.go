@@ -7,7 +7,7 @@ import (
 )
 
 type Mode int
-type Options func() []string 
+type Options func() []string
 
 const (
 	Combo Mode = iota
@@ -26,7 +26,6 @@ func WithMode(mode Mode) Options {
 		return strings.Fields(fmt.Sprintf("-m %d", mode))
 	}
 }
-
 
 func Primitive(inputfile, outputfile string, numShapes int, opts ...Options) (string, error) {
 	cmdstr := fmt.Sprintf("-i %s -o %s -n %d", inputfile, outputfile, numShapes)
