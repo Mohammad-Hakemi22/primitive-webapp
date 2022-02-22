@@ -44,35 +44,24 @@ func upload(w http.ResponseWriter, r *http.Request) {
 	ext := filepath.Ext(header.Filename)[1:]
 
 	f, err := ioutil.TempFile("./web/img/", fmt.Sprintf("in_img*.%s", ext))
-	if err != nil {
-		panic(err)
-	}
+	checkError(err)
 	defer f.Close()
 
 	_, err = io.Copy(f, file)
-	if err != nil {
-		panic(err)
-	}
+	checkError(err)
 
 	fo, err := ioutil.TempFile("./web/img/", fmt.Sprintf("out_img*.%s", ext))
-	if err != nil {
-		panic(err)
-	}
+	checkError(err)
 	defer fo.Close()
 
 	numshapes, err := strconv.Atoi(numshapesstr)
-	if err != nil {
-		panic(err)
-	}
+	checkError(err)
 
 	shape, err := strconv.Atoi(shapestr)
-	if err != nil {
-		panic(err)
-	}
+	checkError(err)
+
 	_, err = primitive.Primitive(f.Name(), fo.Name(), numshapes, primitive.WithMode(primitive.Mode(shape)))
-	if err != nil {
-		panic(err)
-	}
+	checkError(err)
 
 	http.Redirect(w, r, fmt.Sprintf("/image/%s", filepath.Base(fo.Name())), http.StatusFound)
 
@@ -85,6 +74,12 @@ func showImage(w http.ResponseWriter, r *http.Request) {
 	}
 	tpl := template.Must(template.ParseFiles("web/templates/showimage.html"))
 	tpl.Execute(w, data)
+}
+
+func checkError(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
 
 // func makeTempFile(file io.Reader, prefix, suffix string) (string, error) {
